@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MY BABY 💖</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #ff4b6e;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #fff;
+      font-size: 1.8em;
+      padding: 0 10px;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f5;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: popIn 0.8s ease;
+      width: 85%;
+      max-width: 380px;
+      text-align: center;
+    }
+    @keyframes popIn {
+      from { transform: translate(-50%, -60%) scale(0.5); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    button {
+      background: #ff4b6e;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.1);
+      background: #ff6f91;
+    }
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 6s infinite;
+      border-radius: 0 50% 50% 0;
+      z-index: -1;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+    @keyframes float {
+      from { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+      to { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 For My Baby 💖</h1>
+  <button onclick="showPopup()">Click Me, My Love 💌</button>
+
+  <div class="popup" id="popup">
+    <h2>Hey My Love ❤️</h2>
+    <p id="message">I love you so much, baby! 🌸</p>
+    <button onclick="nextMessage()">Next 💕</button>
+    <button onclick="closePopup()">Close ✨</button>
+  </div>
+
+  <!-- Elvis Presley - Can't Help Falling in Love -->
+  <audio id="song" src="https://www.dropbox.com/scl/fi/d6g56n8i4wv75pnohu5ax/CHFIL.mp3?rlkey=l7wn7w4t45gmlisnpt4bq792o&st=i2u5dhdb&dl=1"></audio>
+
+  <script>
+    const popup = document.getElementById("popup");
+    const song = document.getElementById("song");
+    const messages = [
+      "I love you so much, baby! 🌸",
+      "You are my sunshine on cloudy days ☀️",
+      "We’ll get through everything together 🤝",
+      "I can't help falling in love with you 🎶",
+      "I’m so proud of you 💪💖",
+      "Forever and always, it’s you and me 🌍💕",
+      "You make my heart smile every day 😊💗",
+      "I’d share my fries with you… and that’s true love 🍟😂",
+      "You’re cuter than a baby panda 🐼💕",
+      "My love for you is like WiFi, always connected 📶💖",
+      "If kisses were stars, I’d give you the whole galaxy 🌌💋",
+      "Even Google can’t find someone like you 🔍❤️",
+      "You’re the peanut butter to my jelly 🥜🍓💞",
+      "Can I keep you forever? (Sorry, not sorry 😘)",
+      "You stole my heart, but I’ll let you keep it 💓",
+      "No matter what, you’re my favorite notification 📱❤️",
+      "If I were a cat, I’d spend all 9 lives with you 🐾💖",
+      "Your hugs are my safe place 🤗💖",
+      "You’re my daily dose of happiness 💊💕",
+      "I’d still choose you in every lifetime ⏳❤️",
+      "You’re my forever playlist 🎶❤️",
+      "I love you more than pizza… and that’s saying a LOT 🍕💞",
+      "You’re my sunshine after the rain 🌦️💗",
+      "Your voice is my favorite sound 🎤💕",
+      "I’d rather be with you than win the lottery 💰❤️",
+      "With you, even traffic feels okay 🚗💕",
+      "You’re the reason I believe in magic ✨❤️",
+      "You’re my happy ending 🏰❤️",
+      "You’re my cuddle buddy forever 🛌❤️",
+      "I’d pause my game for you 🎮💖",
+      "You’re more magical than Disney ✨💕",
+      "Even ice cream melts compared to how sweet you are 🍦💗",
+      "Every love song suddenly makes sense 🎶❤️",
+      "You’re the avocado to my toast 🥑🍞❤️",
+      "You make every day Valentine’s Day 💘💕",
+      "You’re my jackpot 🎰💓",
+      "Your love is my comfort zone 🏡❤️",
+      "You’re the rainbow after my storm 🌈💗",
+      "I love you more than free food 😂💕",
+      "You’re my reason to smile randomly 😍💖",
+      "You’re the honey to my tea 🍯☕💕",
+      "You’re the highlight of my life ✨💓",
+      "Being with you feels like home 🏠💕",
+      "You’re the star of my universe 🌌❤️",
+      "I love you more than naps 😂💗",
+      "You’re my favorite hello and hardest goodbye 👋💖",
+      "You’re the cheese to my pizza 🍕🧀💕",
+      "My heart belongs to you forever 🔒❤️",
+      "You’re my forever Valentine 💘💕",
+      "You’re the smile in my selfies 📸❤️",
+      "You’re the sparkle in my eyes ✨💖",
+      "You’re my happily ever after 💍💕",
+      "You’re the sweet dream I never want to wake up from 🌙💗",
+      "You’re my lucky charm 🍀❤️",
+      "You’re the cutest human alive 😍💖",
+      "You’re my forever favorite 💕❤️"
+    ];
+    let index = 0;
+
+    function showPopup() {
+      popup.style.display = "block";
+      song.play();
+    }
+
+    function closePopup() {
+      popup.style.display = "none";
+      song.pause();
+    }
+
+    function nextMessage() {
+      index = (index + 1) % messages.length;
+      document.getElementById("message").innerText = messages[index];
+    }
+
+    // floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
